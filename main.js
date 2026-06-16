@@ -1,32 +1,47 @@
 //create functions  that perfom the mathematical operations
-function add(num1, num2) {
-  return num1 + num2;
+function add(arr) {
+  const sum = arr.reduce((acc, item) => {
+    return acc + item;
+  }, 0);
+
+  return sum;
 }
-function subtract(num1, num2) {
-  return num1 - num2;
+function subtract(arr) {
+  const difference = arr.reduce((acc, item) => {
+    return acc - item;
+  });
+
+  return difference;
 }
-function multiply(num1, num2) {
-  return num1 * num2;
+function multiply(arr) {
+  const product = arr.reduce((acc, item) => {
+    return acc * item;
+  }, 1);
+
+  return product;
 }
-function divide(num1, num2) {
-  return num1 / num2;
+function divide(arr) {
+  const quotient = arr.reduce((acc, item) => {
+    return acc / item;
+  });
+
+  return quotient;
 }
 
 //create a function that takes in two numbers and an operator and performs the operation on the numbers
-let operand1;
+let operands;
 let Operator;
-let operand2;
 
 //operation function that takes in two numbers and an operator and performs the operation on the numbers
-function operate(number1, operator, number2) {
+function operate(arr, operator) {
   if (operator === "+") {
-    return add(number1, number2);
+    return add(arr);
   } else if (operator === "-") {
-    return subtract(number1, number2);
+    return subtract(arr);
   } else if (operator === "*") {
-    return multiply(number1, number2);
+    return multiply(arr);
   } else if (operator === "/") {
-    return divide(number1, number2);
+    return divide(arr);
   }
   return undefined;
 }
@@ -60,23 +75,27 @@ function cleanedOutput(displayedNumbers) {
 
   if (displayedNumbers.includes("+")) {
     cleaned_string = displayedNumbers.split("+");
-    operand1 = Number(cleaned_string[0]);
-    operand2 = Number(cleaned_string[1]);
+    operands = cleaned_string.map((number) => {
+      return Number(number);
+    });
     Operator = "+";
   } else if (displayedNumbers.includes("-")) {
     cleaned_string = displayedNumbers.split("-");
-    operand1 = Number(cleaned_string[0]);
-    operand2 = Number(cleaned_string[1]);
+    operands = cleaned_string.map((number) => {
+      return Number(number);
+    });
     Operator = "-";
   } else if (displayedNumbers.includes("*")) {
     cleaned_string = displayedNumbers.split("*");
-    operand1 = Number(cleaned_string[0]);
-    operand2 = Number(cleaned_string[1]);
+    operands = cleaned_string.map((number) => {
+      return Number(number);
+    });
     Operator = "*";
   } else {
     cleaned_string = displayedNumbers.split("/");
-    operand1 = Number(cleaned_string[0]);
-    operand2 = Number(cleaned_string[1]);
+    operands = cleaned_string.map((number) => {
+      return Number(number);
+    });
     Operator = "/";
   }
 }
@@ -93,7 +112,7 @@ resultBtn.addEventListener("click", () => {
   resultBox.appendChild(resultOperation);
 
   cleanedOutput(displayedNumbers);
-  output.textContent = ` result: ${operate(operand1, Operator, operand2)}`;
+  output.textContent = ` result: ${operate(operands, Operator)}`;
   display.textContent = "";
 });
 
